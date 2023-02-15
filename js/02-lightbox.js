@@ -22,3 +22,10 @@ function createGalleryMarkup(galleryItems) {
   <img class="gallery__image" src="${preview}" alt="${description}" />
 </a>`  }).join('');
 }
+function onTagsContainerClick(event) {
+
+    // відміняє видкриття нового вікна за замовчуванням (тому що картинки обернуті в посилання)
+    event.preventDefault();
+ 
+   
+    }
