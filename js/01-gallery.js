@@ -1,5 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
+// console.log(galleryItems);
 
 // Знаходження div, в який буде додана галерея
 const galleryEl = document.querySelector('.gallery');
@@ -28,27 +29,26 @@ function createGalleryMarkup(galleryItems) {
 }
 
 
-console.log(galleryEl);
-// console.log(galleryItems);
-
-
 // Колбек-функція, 
 function onTagsContainerClick(event) {
 
     // відміняє видкриття нового вікна за замовчуванням (тому що картинки обернуті в посилання)
     event.preventDefault();
-
+ 
     // перевірка, що клік по картинці
-    if (event.target !== "IMG") {
+    if (event.target.nodeName !== "IMG") {
         return;
     }
+
     // знаходження URL картинки великого розміру
     const gallaryElOriginal = event.target.getAttribute("data-source");
+    console.log(gallaryElOriginal);
     
     // шаблонна сторока (данні з бібліотеки)
     const gallaryElOriginalCreate = basicLightbox.create(`
-    <img "${gallaryElOriginal}" width="800" height="600">
+    <img src="${gallaryElOriginal}" width="800" height="600">
 `,
+        
         {
             onShow: () => {
                 document.addEventListener("keydown", onCloseModal);
@@ -59,7 +59,9 @@ function onTagsContainerClick(event) {
             },
         }
     );
+    
     gallaryElOriginalCreate.show();
+// зачиненя модального вікна за допомогою клавиши Escape
     
     function onCloseModal(event) {
         if (event.key === "Escape") {
