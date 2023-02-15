@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
 const galleryEl = document.querySelector(".gallery");
 
 // Виклик функції, яка створює строки з картинками
@@ -9,10 +8,6 @@ const cardMarkup = createGalleryMarkup(galleryItems);
 
 // Додавання в HTML строк з картинками
 galleryEl.insertAdjacentHTML('beforeend', cardMarkup);
-
-// Делегування собитий на спільний div
-galleryEl.addEventListener('click', onTagsContainerClick);
-
 
 // Колбек-функція, яка створює строки з картинками(данні для картинок з об'єкту galleryItems)
 function createGalleryMarkup(galleryItems) {
@@ -22,10 +17,12 @@ function createGalleryMarkup(galleryItems) {
   <img class="gallery__image" src="${preview}" alt="${description}" />
 </a>`  }).join('');
 }
-function onTagsContainerClick(event) {
 
-    // відміняє видкриття нового вікна за замовчуванням (тому що картинки обернуті в посилання)
-    event.preventDefault();
- 
+// Ініціалізація бібліотеки, додає підпис(з атрибуту alt) під картинками, 
+// який з'являється через 250 ms після відкриття картинки. 
+
+    new SimpleLightbox(".gallery a", {
+      captionDelay: 250,
+      captionsData: "alt",
+    });
    
-    }
